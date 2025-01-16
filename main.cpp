@@ -13,8 +13,6 @@ int main()
 	Base::InitGLFW();
 	stbi_set_flip_vertically_on_load(true); //Flip textures on the load for correct render
 
-	//SOME MAGIC
-
 	Graphics graphics;
 	ShaderProgram program;
 
@@ -35,8 +33,8 @@ int main()
 	uint texture = graphics.CreateTexture("image.png");
 
 	Logic::Scene scene;
-	uint first = scene.CreateObject(true, vec3(2, 0, 2), vec3{}, vec3{ 1, 1, 0 }, model, texture);
-	uint second = scene.CreateObject(true, vec3(-5, 0, 2), vec3(0), vec3(1, 1, 0), model, texture);
+	uint first = scene.CreateObject(true, vec3(2, 0, 2), vec3{}, vec3{ 100, 100, 0 }, model, texture);
+	uint second = scene.CreateObject(true, vec3(-5, 0, 2), vec3(0), vec3(100, 100, 0), model, texture);
 
 	Logic::Camera plr;
 	plr.fieldOfView = 1.4f; //80degr
@@ -47,25 +45,24 @@ int main()
 	{
 		Base::Routine();
 
-		if (Base::isWindowInFocus) plr.UpdateView(Base::mouseDelta);
+		//if (Base::isWindowInFocus) plr.UpdateView(Base::mouseDelta);
 
-		plr.body.position += Logic::MoveWASD(plr.cameraRadian) * 3.f;
+		//plr.body.position += Logic::MoveWASD(plr.cameraRadian) * 3.f;
 
 		if (Base::GetKey(GLFW_KEY_RIGHT))
-			scene.data.Get(first)->position.x -= 0.1f;
+			scene.data.Get(first)->position.x -= 10;
 		else if (Base::GetKey(GLFW_KEY_LEFT))
-			scene.data.Get(first)->position.x += 0.1f;
+			scene.data.Get(first)->position.x += 10;
 
-		if(Base::GetKey(GLFW_KEY_UP)) scene.data.Get(first)->position.y += 0.1f;
-		else if (Base::GetKey(GLFW_KEY_DOWN)) scene.data.Get(first)->position.y -= 0.1f;
+		if(Base::GetKey(GLFW_KEY_UP)) scene.data.Get(first)->position.y += 10;
+		else if (Base::GetKey(GLFW_KEY_DOWN)) scene.data.Get(first)->position.y -= 10;
 
 
-		if(scene.CollisionTest(first, second)) scene.data.Get(first)->position.x += 0.1f;
+		if(scene.CollisionTest(first, second)) scene.data.Get(first)->position.x += 1.f;
 
 		ClearBuffer(COLOR | DEPTH);
 
-
-		graphics.DrawQueue(&scene.data, glm::lookAtRH(vec3(0, 0, 0), vec3(0, 0, 1), vec3(0, 1, 0)), orthoRH(0, 800, 0, 600, 0, 100));
+		graphics.DrawQueue(&scene.data, glm::lookAtRH(vec3(0, 0, 0), vec3(0, 0, 1), vec3(0, 1, 0)), orthoRH(-400.f, 400.f, -300.f, 300.f, 0.1f, 100.f));
 
 		glfwSwapBuffers(Base::window);
 	}

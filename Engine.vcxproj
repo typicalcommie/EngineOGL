@@ -136,7 +136,6 @@
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Init.h" />
     <ClInclude Include="Logic.h" />
-    <ClInclude Include="OGLOverlay.h" />
     <ClInclude Include="Storage.h" />
     <ClInclude Include="UI.h" />
   </ItemGroup>
