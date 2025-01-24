@@ -8,12 +8,14 @@ uniform mat4 projection;
 uniform mat4 world;
 uniform mat4 view;
 
+uniform mat4 rota;
+
 out vec2 textureCoordinates;	//Out value should have same name as in fragment shader.
 
 void main()
 {
 	textureCoordinates = textureCoordinatesInput;
 
-	vec4 final = projection * view * world * vec4(position, 1);
+	vec4 final = projection * view * world * rota * vec4(position, 1);
 	gl_Position = final;
 }

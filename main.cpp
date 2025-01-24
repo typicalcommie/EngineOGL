@@ -1,7 +1,7 @@
 #include "Graphics.h"
 #include "Filesystem.h"
-#include "OGLOverlay.h"
 #include "Logic.h"
+#include "Physics.h"
 
 #define rad(x) radians((float)x)
 
@@ -38,12 +38,42 @@ int main()
 
 	Logic::Camera plr;
 	plr.fieldOfView = 1.4f; //80degr
-	plr.cameraRadian = vec3( 1.56f, 0, 0 ); //89degr
+	plr.cameraRadian = vec3(1.56f, 0, 0); //89degr
 	plr.cameraSensitivity = 0.0005f;
+
+	Physics::AABB aabb, aabb1;
+	aabb.rotation = vec3(6.28, 0, 0);
+	aabb.ParseModel(vertices, 6, 5);
+	aabb1.ParseModel(vertices, 6, 5);
+
+	aabb.Collision(aabb1);
+
+	//Report("Minimum pos: ");
+	//Report(aabb.pointMin.x);
+	//Report(' ');
+	//Report(aabb.pointMin.y);
+	//Report(' ');
+	//Report(aabb.pointMin.z);
+
+	//Report("\nMaximum pos: ");
+	//Report(aabb.pointMax.x);
+	//Report(' ');
+	//Report(aabb.pointMax.y);
+	//Report(' ');
+	//Report(aabb.pointMax.z);
+	//Report('\n');
+
+	vec3 rotation{ 3.14, 3.14, 0 };
+	vec3 rot;
+	mat4 quater;
+
+
 
 	while (!glfwWindowShouldClose(Base::window))
 	{
 		Base::Routine();
+
+
 
 		//if (Base::isWindowInFocus) plr.UpdateView(Base::mouseDelta);
 

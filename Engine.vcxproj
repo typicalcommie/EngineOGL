@@ -108,6 +108,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -136,6 +137,7 @@
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Init.h" />
     <ClInclude Include="Logic.h" />
+    <ClInclude Include="Physics.h" />
     <ClInclude Include="Storage.h" />
     <ClInclude Include="UI.h" />
   </ItemGroup>
